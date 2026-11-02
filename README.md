@@ -17,29 +17,29 @@ NEO aims to bring these tasks together in one system.
 ## Planned Features
 
 - **Note Management:** Import, organize, and access lecture notes.
-    
-- **AI-Generated Summaries:** Turn lecture notes into concise summaries.
-    
+
 - **AI-Generated Flashcards:** Generate question-and-answer flashcards based on supplied notes.
-    
+
 - **Interactive Study Sessions:** Practise flashcards one question at a time and assess answers.
-    
-- **Progress Tracking:** Record correct and incorrect answers, calculate accuracy, and identify difficult flashcards.
-    
+
 - **Persistent Storage:** Save notes, study materials, and practice history so users can return to previous sessions.
-    
+
 - **Error Handling:** Handle invalid input, API failures, and storage errors reliably.
+
+- **Progress Tracking:** Record correct and incorrect answers, calculate accuracy, and identify difficult flashcards.
+
+- **AI-Generated Summaries:** Turn lecture notes into concise summaries.
 
 ## Technology Stack
 
 - **Language:** Python
-    
+
 - **Interface:** Command-line interface (CLI)
-    
-- **AI Integration:** Hosted AI API
-    
-- **Data Storage:** To be determined (JSON or SQLite)
-    
+
+- **AI Integration:** Gemini API (Google)
+
+- **Data Storage:** JSON files
+
 - **Version Control:** Git and GitHub
 
 _The technology stack and features may evolve during development._
@@ -47,20 +47,20 @@ _The technology stack and features may evolve during development._
 ## Project Goals
 
 - Build a useful tool that addresses a real study problem.
-    
+
 - Strengthen Python programming and problem-solving skills.
-    
+
 - Learn to integrate AI APIs into a practical application.
-    
+
 - Develop reliable data storage, validation, and error handling.
-    
+
 - Build software incrementally using Git and good development practices.
 
 ## Project Status
 
 🚧 **In Development**
 
-NEO is currently in the planning and initial development stage. Features will be implemented incrementally, tested, and refined as the project progresses.
+NEO is currently in the planning and initial development stage. The core loop (import notes, generate flashcards, practise, save progress) is being built first. Features will be implemented incrementally, tested, and refined as the project progresses.
 
 ## Getting Started
 
