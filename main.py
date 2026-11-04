@@ -1,3 +1,28 @@
+import json, os
+
+## handles loading data from a .json file
+def load_data():
+  ## catches non existent json file and returns empty data to avoid a crash
+  if not os.path.exists(DATA_FILE):
+    return empty_data()
+  
+  ## handles the json file if it exists
+  try:
+    with open(DATA_FILE, encoding='utf-8') as file:
+      ## sets defaults for any key/value pair that doesn't exist in an object from the json file
+      data = json.load(file)
+      for key, value in empty_data().items():
+        data.setdefault(key, value)
+      return data
+  ## handles corrupted files and renames it to be recovered later by the user
+  except json.JSONDecodeError:
+    print(f'JSON File damage. It has now been RENAMED to {BACKUP_FILE}.')
+    os.replace(DATA_FILE, BACKUP_FILE)
+  
+  ## returns the function containing empty dictionary/object data
+  return empty_data()
+
+
 ## display the menu options of the applicatin to the user
 def display_menu():
   ## format for title string
@@ -33,7 +58,7 @@ def import_notes():
   print('IMPORT NOTES'.center(50, ' '))
   print('=' * 50)
   ## tells the user they can exit out of the current feature
-  print('type "exit" anytime to cancel')
+  print('(type "exit" anytime to cancel)')
 
   while True:
     ## gets the path of a note from the user
@@ -45,6 +70,11 @@ def import_notes():
       print('Import Cancelled\n')
       return
     else:
+      ## makes sure the user imports only a txt file
+      if not path_exit.endswith('.txt'):
+        print('Make sure your FILE is a .txt FILE.')
+        continue
+
       ## a try and except block to handle file ERRORS
       try:
         ## opens the note and stores what the note contains
@@ -60,6 +90,10 @@ def import_notes():
           break
       except FileNotFoundError:
         print('Error: The file does not exist.')
+      except OSError:
+        print("File cannot be OPENED, make sure you have ACCESS and it's a FILE not FOLDER.")
+      except UnicodeDecodeError:
+        print('File is not readable, use a PLAIN .txt FILE.')
 
 
 ## shows the user the available note sets
@@ -91,6 +125,12 @@ def study_progress():
 def exit_program():
   print('EXIT PROGRAM')
 
+
+## returns empty data for error handling
+def empty_data():
+    return {'note_sets': [], 'flashcards': [], 'attempts': []}
+
+
 ## menu features
 MENU_FEATURES = {
   '1': ('Import notes', import_notes),
@@ -101,6 +141,12 @@ MENU_FEATURES = {
   '6': ('View study progress', study_progress),
   '7': ('Exit', exit_program)
 }
+
+
+## constant file path
+DATA_FILE = 'data/neo_data.json'
+BACKUP_FILE = 'data/neo_data.corrupt.json'
+
 
 ## calls the functions of the application
 display_menu()
